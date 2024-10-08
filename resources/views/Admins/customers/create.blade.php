@@ -1,0 +1,1 @@
+@extends('Admins.layouts.master')
