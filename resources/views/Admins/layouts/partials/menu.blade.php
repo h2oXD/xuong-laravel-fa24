@@ -29,6 +29,10 @@
                     <span class="menu-icon"><i class="ti ti-user"></i></span>
                     <span class="menu-text"> Quản lý Employees </span>
                 </a>
+                <a href="{{route('students.index')}}" class="side-nav-link">
+                    <span class="menu-icon"><i class="ti ti-user"></i></span>
+                    <span class="menu-text"> Quản lý Students </span>
+                </a>
             </li>
         </ul>
     </div>

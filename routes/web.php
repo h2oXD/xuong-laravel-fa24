@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StudentController;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\FinancialReport;
+use App\Models\Phone;
+use App\Models\Post;
 use App\Models\Sale;
+use App\Models\Student;
 use App\Models\Taxe;
+use App\Models\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,33 +33,74 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Relation 1-1
+Route::get('/user', function () {
+    $users = User::with('phone')->paginate(10);
+    return view('Admins.user-list', compact('users'));
+});
+Route::get('/phones/{id}', function ($id) {
+    $data = Phone::with('user')->find($id);
+    dd($data->user);
+});
+
+//Relation 1-N
+Route::get('/posts/{id}', function ($id) {
+    $posts = Post::with('comments')->find($id);
+    dd($posts->comments);
+});
+
+//Relation N-N
+Route::get('/users/{id}/add-role', function ($id) {
+    $roles = [1, 2, 4, 5];
+    $users = User::find($id);
+    // $users->roles()->attach($roles); //Thêm
+    // $users->roles()->detach($roles); //Xoá
+    // $users->roles()->sync($roles); //Thêm & Xoá
+    // dd();
+});
+
+Route::get('admin', function () {
+    return view('Admins.dashboard');
+})->name('admin.dashboard');
+
+$objects = [
+    'students' => StudentController::class,
+];
+foreach ($objects as $key => $value) {
+    Route::prefix('admin')->group(function () use ($key, $value) {
+        Route::resource($key, $value);
+    });
+}
+
+//CRUD - employees
 Route::resource('admin/employees', EmployeeController::class);
 Route::delete('admin/employees/{employee}/forceDestroy', [EmployeeController::class, 'forceDestroy'])->name('employees.forceDestroy');
 
-
+//CRUD - customers
 Route::resource('admin/customers', CustomerController::class);
 Route::delete('admin/customers/{customer}/forceDestroy', [CustomerController::class, 'forceDestroy'])->name('customers.forceDestroy');
 
-
+//Auth - LaravelUI
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('movies',function(){
-    echo 'Đây là trang movies';
-})->middleware('yearold');
+//Bài tập Middleware
+// Route::get('movies',function(){
+//     echo 'Đây là trang movies';
+// })->middleware('yearold');
 
-Route::middleware('role')->group(function(){
-    Route::get('admin', function () {
-        return view('Admins.dashboard');
-    })->name('admin.dashboard');
-    
-    Route::get('orders', function () {
-        echo 'Trang Cho Nhân Viên';
-    });
-    Route::get('profile', function () {
-        echo 'Trang cho Khách hàng';
-    });
-});
+// Route::middleware('role')->group(function(){
+//     Route::get('admin', function () {
+//         return view('Admins.dashboard');
+//     })->name('admin.dashboard');
+
+//     Route::get('orders', function () {
+//         echo 'Trang Cho Nhân Viên';
+//     });
+//     Route::get('profile', function () {
+//         echo 'Trang cho Khách hàng';
+//     });
+// });
 
 
 
