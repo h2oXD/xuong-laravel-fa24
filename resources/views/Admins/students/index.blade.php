@@ -70,6 +70,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="mt-2">
+                                    {{$students->links()}}
+                                </div>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end card body-->
                     </div> <!-- end card -->
