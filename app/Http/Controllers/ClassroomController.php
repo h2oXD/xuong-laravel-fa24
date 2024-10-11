@@ -11,9 +11,11 @@ class ClassroomController extends Controller
     /**
      * Display a listing of the resource.
      */
+    const PATH_VIEW = 'Admins.classrooms.';
     public function index()
     {
-        //
+        $classrooms = Classroom::latest()->paginate(10);
+        return view(self::PATH_VIEW . __FUNCTION__, compact('classrooms'));
     }
 
     /**

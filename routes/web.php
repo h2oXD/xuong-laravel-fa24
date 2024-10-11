@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\FinancialReport;
@@ -27,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,6 +66,8 @@ Route::get('admin', function () {
 
 $objects = [
     'students' => StudentController::class,
+    'classrooms' => ClassroomController::class,
+    'subjects' => SubjectController::class,
 ];
 foreach ($objects as $key => $value) {
     Route::prefix('admin')->group(function () use ($key, $value) {

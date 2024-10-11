@@ -11,9 +11,11 @@ class SubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
+    const PATH_VIEW = 'Admins.subjects.';
     public function index()
     {
-        //
+        $subjects = Subject::latest()->paginate(10);
+        return view(self::PATH_VIEW . __FUNCTION__,compact('subjects'));
     }
 
     /**
