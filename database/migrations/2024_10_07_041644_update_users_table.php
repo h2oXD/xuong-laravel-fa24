@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role',[1,2,3])->default(3)->comment('1-admin,2-nhanvien,3-khachhang');
-            $table->integer('tuoi');
+            // $table->integer('tuoi');
         });
     }
 
