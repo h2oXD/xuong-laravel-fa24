@@ -49,11 +49,11 @@
                                                 <td>{{ $student->updated_at }}</td>
                                                 <td class="text-center text-muted">
                                                     <a title="Chi tiết" href="{{ route('students.show', $student) }}"
-                                                        class="link-reset fs-20 p-1"><i class="ti ti-info-circle"></i></a>
+                                                        class="link-reset fs-20 p-1 text-info"><i class="ti ti-info-circle"></i></a>
                                                 </td>
                                                 <td class="text-center text-muted">
                                                     <a title="Chỉnh sửa" href="{{ route('students.edit', $student) }}"
-                                                        class="link-reset fs-20 p-1"><i class="ti ti-pencil"></i></a>
+                                                        class="link-reset fs-20 p-1 text-warning"><i class="ti ti-pencil"></i></a>
                                                 </td>
                                                 <td class="text-center text-muted">
                                                     <form method="POST"
@@ -62,7 +62,7 @@
                                                         @method('DELETE')
                                                         <button title="Xoá"
                                                             onclick="return confirm('Bạn có chắc muốn xoá?')" type="submit"
-                                                            class="btn link-reset fs-20 p-1"><i
+                                                            class="btn link-reset fs-20 p-1 text-danger"><i
                                                                 class="ti ti-trash"></i></button>
                                                     </form>
                                                 </td>

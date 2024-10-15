@@ -34,7 +34,11 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = Project::find($id);   
+        $tasks = $project->tasks;
+        return response()->json([
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -42,7 +46,11 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $project = Project::find($id);   
+        $tasks = $project->tasks()->update($request->all());
+        return response()->json([
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -50,6 +58,8 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::find($id);
+        $tasks = $project->tasks()->delete();
+        return response()->noContent();
     }
 }

@@ -78,8 +78,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        $classrooms = Classroom::all();  // Lấy danh sách lớp học
-        $subjects = Subject::all();      // Lấy danh sách môn học
+        $classrooms = Classroom::all();  
+        $subjects = Subject::all();      
 
         return view(self::PATH_VIEW . __FUNCTION__, compact('student', 'classrooms', 'subjects'));
     }
